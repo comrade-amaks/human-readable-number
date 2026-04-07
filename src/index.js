@@ -44,14 +44,14 @@ module.exports = function toReadable(number) {
       // or math variant Math.floor(number / 10) * 10 ( 21 / 10 = math.floor(2.1) =  2 * 10 = 20)
       return dictionary[number];
     }
-    // eslint-disable-next-line
-    return `${dictionary[number.toString()[0] + '0']} ${dictionary[number.toString()[1]]}`;
+    const tens = `${number.toString()[0]}0`;
+    return `${dictionary[tens]} ${dictionary[number.toString()[1]]}`;
     // return `${dictionary[Math.floor(number / 10) * 10]} ${dictionary[number % 10]}`
   }
 
   if (number >= 100 && number <= 999) {
-    // eslint-disable-next-line
-    return `${dictionary[number.toString()[0]]} ${dictionary[100]}${number % 100 ? ' ' + toReadable(number % 100) : ''}`;
+    const tens = ` ${toReadable(number % 100)}`;
+    return `${dictionary[number.toString()[0]]} ${dictionary[100]}${number % 100 ? tens : ''}`;
   }
 
   return 'Enter a number from 0 to 999';
